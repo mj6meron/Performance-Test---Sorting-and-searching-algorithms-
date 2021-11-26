@@ -11,32 +11,44 @@ Pivot = array[0]       --->  Recursive function
 """
 from main import menu
 
-tests = [4, 5, 8, 2, 3, 1]
+tests = [3, 2]
+
+f = "first element"
+m = "median of three elements"
 
 
-def quicksort(numbers, first, last):
-    if first >= last:
-        return numbers
-    pivot = partition_x(numbers, first, last)
-    print('hi')
-    print(quicksort(numbers, first, pivot - 1))
-
-    print('hello')
-    quicksort(numbers, pivot + 1, last)
+def quicksort(numbers, first, last, pivot_selection):
+    if first < last:
+        if pivot_selection == "first element":
+            swap(numbers, first, last)
+        if pivot_selection == "median of three elements":
+            swap(numbers, get_median(numbers), last)
+        pivot = partition_x(numbers, first, last)
+        quicksort(numbers, first, pivot - 1, pivot)
+        quicksort(numbers, pivot + 1, last, pivot)
     return numbers
 
 
-
 def partition_x(numbers, first, last):
-    pivot = numbers[0]
-    swap(numbers, 0, last)
     i = first - 1  # i indicates the index less than the pivot
-    for j in range(0, last - 1):
-        if numbers[j] <= pivot:
+    for j in range(first, last):  # assuming the pivot is the last element
+        if numbers[j] <= numbers[last]:
             i += 1
             swap(numbers, i, j)
     swap(numbers, i + 1, last)
     return i + 1
+
+
+def get_median(numbers):
+    first = numbers[0]
+    last = numbers[-1]
+    mid = numbers[len(numbers) // 2]
+    if mid <= first <= last: return 0
+    if mid >= first >= last: return 0
+    if first <= last <= mid: return -1
+    if first >= last >= mid: return -1
+    if first <= mid <= last: return len(numbers) // 2
+    if first >= mid >= last: return len(numbers) // 2
 
 
 def swap(my_list, pos1, pos2):
@@ -45,28 +57,8 @@ def swap(my_list, pos1, pos2):
     my_list[pos1], my_list[pos2] = p2, p1
 
 
-x = quicksort(tests, 0, len(tests) - 1)
-print(x)
-
-
-def quicksort_median(numbers):
-    pass
-
-
-def get_median(numbers):
-    first = numbers[0]
-    last = numbers[-1]
-    mid = numbers[len(numbers) // 2]
-    if mid <= first <= last: return first
-    if mid >= first >= last: return first
-    if first <= last <= mid: return last
-    if first >= last >= mid: return last
-    if first <= mid <= last: return mid
-    if first >= mid >= last: return mid
-
-
-def quicksort_randomile(numbers):
-    pass
+o = quicksort(menu(20), 0, len(menu(20)) - 1, m)
+print(o)
 
 
 def partition(arr, l, h):
