@@ -5,37 +5,71 @@ Based on the divide and conquer approach, this sorting method is fast
 
 Three ways of selecting the pivot and each way being either recursive or iterative
 
+First element pivot    --->  Recursive function
 Median-of-three pivot  --->  Recursive function
 Random pivot           --->  Iterative function
-Pivot = array[0]       --->  Recursive function
 """
+import random
 from main import menu
+import sys
 
-tests = [3, 2]
-
+sys.setrecursionlimit(10000000)
+"""pivot selection menu"""
 f = "first element"
 m = "median of three elements"
+r = "random element"
 
 
-def quicksort(numbers, first, last, pivot_selection):
+def quicksort_recursive(numbers, first, last, pivot_selection):
     if first < last:
-        if pivot_selection == "first element":
-            swap(numbers, first, last)
-        if pivot_selection == "median of three elements":
-            swap(numbers, get_median(numbers), last)
-        pivot = partition_x(numbers, first, last)
-        quicksort(numbers, first, pivot - 1, pivot)
-        quicksort(numbers, pivot + 1, last, pivot)
+        pivot = partition_x(numbers, first, last, pivot_selection)
+        quicksort_recursive(numbers, first, pivot - 1, pivot)
+        quicksort_recursive(numbers, pivot + 1, last, pivot)
     return numbers
 
 
-def partition_x(numbers, first, last):
+def quicksort_iterative(numbers, first, last, pivot_selection):
+    size = last - first + 1
+    stack = [0] * size
+    top = -1
+    top = top + 1
+    stack[top] = first
+    top = top + 1
+    stack[top] = last
+    while top >= 0:
+        last = stack[top]
+        top = top - 1
+        first = stack[top]
+        top = top - 1
+
+        p = partition_x(numbers, first, last, pivot_selection)
+        if p - 1 > first:
+            top = top + 1
+            stack[top] = first
+            top = top + 1
+            stack[top] = p - 1
+        if p + 1 < last:
+            top = top + 1
+            stack[top] = p + 1
+            top = top + 1
+            stack[top] = last
+    return numbers
+
+
+def partition_x(numbers, first, last, pivot_selection):
+    if pivot_selection == "first element":
+        numbers[first], numbers[last] = numbers[last], numbers[first]
+    if pivot_selection == "median of three elements":
+        numbers[get_median(numbers)], numbers[last] = numbers[last], numbers[get_median(numbers)]
+    if pivot_selection == "random element":
+        random_pivot = random.randint(first, last)
+        numbers[random_pivot], numbers[last] = numbers[last], numbers[random_pivot]
     i = first - 1  # i indicates the index less than the pivot
-    for j in range(first, last):  # assuming the pivot is the last element
+    for j in range(first, last):  # assuming the pivot is the last element + last not included
         if numbers[j] <= numbers[last]:
             i += 1
-            swap(numbers, i, j)
-    swap(numbers, i + 1, last)
+            numbers[j], numbers[i] = numbers[i], numbers[j]
+    numbers[i + 1], numbers[last] = numbers[last], numbers[i + 1]
     return i + 1
 
 
@@ -50,76 +84,23 @@ def get_median(numbers):
     if first <= mid <= last: return len(numbers) // 2
     if first >= mid >= last: return len(numbers) // 2
 
-
-def swap(my_list, pos1, pos2):
-    p1 = my_list[pos1]
-    p2 = my_list[pos2]
-    my_list[pos1], my_list[pos2] = p2, p1
-
-
-o = quicksort(menu(20), 0, len(menu(20)) - 1, m)
-print(o)
-
-
-def partition(arr, l, h):
-    i = (l - 1)
-    x = arr[h]
-
-    for j in range(l, h):
-        if arr[j] <= x:
-            # increment index of smaller element
-            i = i + 1
-            arr[i], arr[j] = arr[j], arr[i]
-
-    arr[i + 1], arr[h] = arr[h], arr[i + 1]
-    return i + 1
+o = menu(100000)
+quicksort_recursive(o, o[0], len(o) - 1, f)
+print("firstPivot recursive")
+quicksort_recursive(o, 0, len(o) - 1, m)
+print("median recursive")
+randomPivot = quicksort_iterative(o, 0, len(o) - 1, r)
+print("random iterative")
+print(randomPivot)
 
 
-# Function to do Quick sort
-# arr[] --> Array to be sorted,
-# l  --> Starting index,
-# h  --> Ending index
-def quickSortIterative(arr, l, h):
-    # Create an auxiliary stack
-    size = h - l + 1
-    stack = [0] * size
+"""
+Fast simple sorting algorithm
+For a large number of inputs containing duplicates
+----  space complexity  ------ 
+Creating additional arrays by the algorithm makes it less chosen than quick sort
+"""
 
-    # initialize top of stack
-    top = -1
-
-    # push initial values of l and h to stack
-    top = top + 1
-    stack[top] = l
-    top = top + 1
-    stack[top] = h
-
-    # Keep popping from stack while is not empty
-    while top >= 0:
-
-        # Pop h and l
-        h = stack[top]
-        top = top - 1
-        l = stack[top]
-        top = top - 1
-
-        # Set pivot element at its correct position in
-        # sorted array
-        p = partition(arr, l, h)
-
-        # If there are elements on left side of pivot,
-        # then push left side to stack
-        if p - 1 > l:
-            top = top + 1
-            stack[top] = l
-            top = top + 1
-            stack[top] = p - 1
-
-
-# print(quicksort_median(menu(1000000)))
-
-
-# fastest simple sorting algorithm for a large number of inputs containing duplicates
-# but in terms of space complexity, creating additional arrays by the algorithm makes it less chosen than quick sort
 
 def quicksort_median(numbers):
     if len(numbers) <= 1:
