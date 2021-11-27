@@ -13,7 +13,7 @@ import random
 from main import menu
 import sys
 
-sys.setrecursionlimit(1000000)
+sys.setrecursionlimit(2000000)
 """pivot selection menu"""
 f = "first element"
 m = "median of three elements"
@@ -85,12 +85,12 @@ def get_median(numbers):
     if first >= mid >= last: return len(numbers) // 2
 
 
-o = menu(1000000)
+o = menu(100000)
 quicksort_recursive(o, 0, len(o) - 1, f)
 print("firstPivot recursive")
 # quicksort_recursive(o, 0, len(o) - 1, m)
 print("median recursive")
-# randomPivot = quicksort_iterative(o, 0, len(o) - 1, r)
+randomPivot = quicksort_iterative(o, 0, len(o) - 1, r)
 print("random iterative")
 # print(randomPivot)
 

@@ -9,6 +9,9 @@ Then as the recursion tends to reverse then we start merging and sorting
 """
 
 from main import menu
+import sys
+
+sys.setrecursionlimit(1000000)
 
 
 def merge_sort(numbers_list):
@@ -31,3 +34,6 @@ def merge_sort(numbers_list):
     sorted_numbers += left_list[left_index:]
     sorted_numbers += right_list[right_index:]
     return sorted_numbers
+
+
+# print(merge_sort(menu(1000000)))
