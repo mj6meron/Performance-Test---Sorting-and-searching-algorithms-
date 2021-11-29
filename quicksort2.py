@@ -10,9 +10,8 @@ Median-of-three pivot  --->  Recursive function
 Random pivot           --->  Iterative function
 """
 import random
-import sys
-
 from main import menu
+import sys
 
 sys.setrecursionlimit(1000000000)
 
@@ -90,7 +89,64 @@ def quickSort(array, low, high, pivot_selection):
         quickSort(array, pi + 1, high, pivot_selection)
 
 
-# n_ten = menu(1000000)
-# print(len(n_ten))
-# quickSort(n_ten, 0, len(n_ten) - 1, "first element")
-# print(n_ten)
+# Driver code to test above
+o = menu(10000)
+arr = o
+print(len(o))
+n = len(arr)
+quickSort(arr, 0, n - 1, 'first element')
+# quickSort(arr, 0, n - 1, ' first element')
+print(arr)
+print('---------------')
+ten = menu(10)
+n_ten = ten
+print(n_ten)
+quickSort(n_ten, 0, len(n_ten) - 1, "first element")
+print(n_ten)
+
+# ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
+# def quicksort_median(numbers):
+#     if len(numbers) <= 1:
+#         return numbers
+#     smaller = []
+#     same = []
+#     larger = []
+#     pivot = get_median(numbers)
+#     for x in numbers:
+#         if x < pivot:
+#             smaller.append(x)
+#         if x > pivot:
+#             larger.append(x)
+#         if x == pivot:
+#             same.append(x)
+#     quicksort_median(smaller)
+#     quicksort_median(larger)
+#     numbers.clear()
+#     numbers += smaller
+#     numbers += same
+#     numbers += larger
+#     return numbers
+#
+#
+# def quicksort_first(numbers):
+#     if len(numbers) <= 1:
+#         return numbers
+#     smaller = []
+#     same = []
+#     larger = []
+#     pivot = numbers[0]
+#     for x in numbers:
+#         if x < pivot:
+#             smaller.append(x)
+#         if x > pivot:
+#             larger.append(x)
+#         if x == pivot:
+#             same.append(x)
+#     quicksort_median(smaller)
+#     quicksort_median(larger)
+#     numbers.clear()
+#     numbers += smaller
+#     numbers += same
+#     numbers += larger
+#     return numbers

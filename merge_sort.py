@@ -8,18 +8,17 @@ So the fist step is to use recursion to divide the list into individual elements
 Then as the recursion tends to reverse then we start merging and sorting
 """
 
-from main import menu
 import sys
 
 sys.setrecursionlimit(1000000)
 
 
-def merge_sort(numbers_list):
+def mergeSort(numbers_list):
     if len(numbers_list) <= 1:
         return numbers_list
     middle_index = len(numbers_list) // 2
-    left_list = merge_sort(numbers_list[:middle_index])
-    right_list = merge_sort(numbers_list[middle_index:])
+    left_list = mergeSort(numbers_list[:middle_index])
+    right_list = mergeSort(numbers_list[middle_index:])
     """ Where the magic happens - merging back and sorting"""
     sorted_numbers = []
     left_index = 0
@@ -34,6 +33,5 @@ def merge_sort(numbers_list):
     sorted_numbers += left_list[left_index:]
     sorted_numbers += right_list[right_index:]
     return sorted_numbers
-
 
 # print(merge_sort(menu(1000000)))

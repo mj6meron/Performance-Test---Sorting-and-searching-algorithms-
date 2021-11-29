@@ -14,7 +14,7 @@ pseudo code :
 
 """
 
-from main import menu as menu
+# from main import menu as menu
 
 
 def insertion_sort(number_list):
