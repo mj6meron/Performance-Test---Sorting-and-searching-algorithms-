@@ -84,4 +84,4 @@ def quickSort(array, first, end, pivot_selection):
         # partition and after partition
         quickSort(array, first, pivot - 1, pivot_selection)
         quickSort(array, pivot + 1, end, pivot_selection)
-
+    return array
