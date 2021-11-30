@@ -12,9 +12,7 @@ Random pivot           --->  Iterative function
 import random
 import sys
 
-from main import menu
-
-sys.setrecursionlimit(1000000000)
+sys.setrecursionlimit(1000000)
 
 
 def get_median(numbers):
@@ -76,21 +74,14 @@ def partition(numbers, first, last, pivot_selection):
     return i + 1
 
 
-def quickSort(array, low, high, pivot_selection):
+def quickSort(array, first, end, pivot_selection):
     if len(array) == 1:
         return array
-    if low < high:
-        # pi is partitioning index, arr[p] is now
-        # at right place
-        pi = partition(array, low, high, pivot_selection)
+    if first < end:
+        pivot = partition(array, first, end, pivot_selection)
 
         # Separately sort elements before
         # partition and after partition
-        quickSort(array, low, pi - 1, pivot_selection)
-        quickSort(array, pi + 1, high, pivot_selection)
+        quickSort(array, first, pivot - 1, pivot_selection)
+        quickSort(array, pivot + 1, end, pivot_selection)
 
-
-# n_ten = menu(1000000)
-# print(len(n_ten))
-# quickSort(n_ten, 0, len(n_ten) - 1, "first element")
-# print(n_ten)

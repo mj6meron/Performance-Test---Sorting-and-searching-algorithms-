@@ -3,7 +3,6 @@
 # from timeit import timeit as timer
 
 
-
 def binary_search(arr, low, high, x):
     # Check base case -> if list is not empty while on recursion
     if high >= low:
@@ -25,4 +24,3 @@ def binary_search(arr, low, high, x):
 
 def search(arr, x):
     return binary_search(arr, arr[0], len(arr) - 1, x)
-
