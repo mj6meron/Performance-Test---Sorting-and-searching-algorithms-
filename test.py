@@ -1,11 +1,11 @@
 """ This test file does all the performance testing"""
 
-from main import menu
 import timeit
-import quick_sort as q
 import binarysearch as b
 import insertion_sort as i
 import merge_sort as m
+import quick_sort as q
+from main import menu
 
 n_ten = menu(10)
 n_hundred = menu(100)
@@ -15,7 +15,7 @@ n_hundredThousand = menu(100000)
 n_oneMillion = menu(1000000)
 inputs = [len(n_ten), len(n_hundred), len(n_oneThousand), len(n_tenThousand), len(n_hundredThousand),
           len(n_oneMillion)]
-cycles = 1  # implies the cycles of test of each input
+cycles = 3  # implies the cycles of test of each input
 inputsN = 6  # implies the number of inputs eg,(1 says n = 10), (2 says n=10, n = 100) ... etc
 sortingSetup = '''
 import insertion_sort as i
@@ -63,9 +63,9 @@ def insertionSortTest():
     # pass the number of inputs by tweaking this len(insertionInputs)
     for x in range(0, inputsN):
         insertionSortRunningTime = timeit.repeat(stmt=insertionInputs[x], repeat=cycles, setup=sortingSetup, number=1)
+        average = '{:.10f}'.format(sum(insertionSortRunningTime) / len(insertionSortRunningTime))
         print('Insertion sort for n = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(insertionSortRunningTime)))
-        print('Average time: ' + str(sum(insertionSortRunningTime) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
@@ -79,9 +79,9 @@ def mergeSortTest():
     # pass the number of inputs by tweaking this len(mergeInputs)
     for x in range(0, inputsN):
         mergeSortRunningTime = timeit.repeat(stmt=mergeInputs[x], repeat=cycles, setup=sortingSetup, number=1)
+        average = '{:.10f}'.format(sum(mergeSortRunningTime) / len(mergeSortRunningTime))
         print('Merge sort for n = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(mergeSortRunningTime)))
-        print('Average time: ' + str(sum(mergeSortRunningTime) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
@@ -98,12 +98,12 @@ def quickSortTest_firstPivot():
         '************************************  Quick-Sort - firstPivot  ********************************************')
     # pass the number of inputs by tweaking this len(mergeInputs)
     for x in range(0, inputsN - 1):
-        quicksortRunningTime_firstPivot = timeit.repeat(stmt=quickSort_firstPivotInputs[x], repeat=cycles,
-                                                        setup=sortingSetup,
-                                                        number=1)
+        quicksort_firstPivot = timeit.repeat(stmt=quickSort_firstPivotInputs[x], repeat=cycles,
+                                             setup=sortingSetup,
+                                             number=1)
+        average = '{:.10f}'.format(sum(quicksort_firstPivot) / len(quicksort_firstPivot))
         print('Quick sort for n = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(quicksortRunningTime_firstPivot)))
-        print('Average time: ' + str(sum(quicksortRunningTime_firstPivot) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
@@ -120,12 +120,12 @@ def quickSortTest_middlePivot():
         '************************************  Quick-Sort - middlePivot  ********************************************')
     # pass the number of inputs by tweaking this len(mergeInputs)
     for x in range(0, inputsN - 1):
-        quicksortRunningTime_middlePivot = timeit.repeat(stmt=quickSort_middlePivotInputs[x], repeat=cycles,
-                                                         setup=sortingSetup,
-                                                         number=1)
+        quicksort_middlePivot = timeit.repeat(stmt=quickSort_middlePivotInputs[x], repeat=cycles,
+                                              setup=sortingSetup,
+                                              number=1)
+        average = '{:.10f}'.format(sum(quicksort_middlePivot) / len(quicksort_middlePivot))
         print('Quick sort for n = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(quicksortRunningTime_middlePivot)))
-        print('Average time: ' + str(sum(quicksortRunningTime_middlePivot) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
@@ -142,12 +142,12 @@ def quickSortIterativeTest_randomPivot():
         '***************************  Quick-Sort ( Iterative ) - randomPivot  ********************************')
     # pass the number of inputs by tweaking this len(mergeInputs)
     for x in range(0, inputsN - 1):
-        quicksortRunningTime_randomPivot = timeit.repeat(stmt=quickSort_randomPivotInputs[x], repeat=cycles,
-                                                         setup=sortingSetup,
-                                                         number=1)
+        quicksortTime_randomPivot = timeit.repeat(stmt=quickSort_randomPivotInputs[x], repeat=cycles,
+                                                  setup=sortingSetup,
+                                                  number=1)
+        average = '{:.10f}'.format(sum(quicksortTime_randomPivot) / len(quicksortTime_randomPivot))
         print('Quick sort for n = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(quicksortRunningTime_randomPivot)))
-        print('Average time: ' + str(sum(quicksortRunningTime_randomPivot) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
@@ -168,12 +168,12 @@ def binarySearchTest_nonexistent():
         '***********************  Binary search - upper bound ( Element not found ) *******************************')
     # pass the number of inputs by tweaking this len(mergeInputs)
     for x in range(0, inputsN):
-        quicksortRunningTime_firstPivot = timeit.repeat(stmt=binarySearchInputs_nonexistent[x], repeat=cycles,
-                                                        setup=binarySetup,
-                                                        number=1)
+        binaryTime_firstPivot = timeit.repeat(stmt=binarySearchInputs_nonexistent[x], repeat=cycles,
+                                              setup=binarySetup,
+                                              number=1)
+        average = '{:.10f}'.format(sum(binaryTime_firstPivot) / len(binaryTime_firstPivot))
         print('Binary Search in a list of length = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(quicksortRunningTime_firstPivot)))
-        print('Average time: ' + str(sum(quicksortRunningTime_firstPivot) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
@@ -191,26 +191,25 @@ def binarySearchTest_middleElement():
         '***********************  Binary search - lower bound ( Element in the middle ) *****************************')
     # pass the number of inputs by tweaking this len(mergeInputs)
     for x in range(0, inputsN):
-        quicksortRunningTime_middleElement = timeit.repeat(stmt=binarySearchInputs_middleElement[x], repeat=cycles,
-                                                           setup=binarySetup,
-                                                           number=1)
+        binaryTime_middleElement = timeit.repeat(stmt=binarySearchInputs_middleElement[x], repeat=cycles,
+                                                 setup=binarySetup,
+                                                 number=1)
+        average = '{:.10f}'.format(sum(binaryTime_middleElement) / len(binaryTime_middleElement))
         print('Binary Search in a list of length = ' + str(inputs[x]))
-        print('%s cycles ---- > %s' % (cycles, str(quicksortRunningTime_middleElement)))
-        print('Average time: ' + str(sum(quicksortRunningTime_middleElement) / cycles))
+        print('Average time: %s ' % average)
         print('------------------------------------------------------------')
 
 
 print()
 print('                      ---- Performance Testing Right? ----')
 
-# insertionSortTest()
-# mergeSortTest()
+mergeSortTest()
 quickSortTest_firstPivot()
 quickSortTest_middlePivot()
 quickSortIterativeTest_randomPivot()
-# binarySearchTest_nonexistent()
-# binarySearchTest_middleElement()
-
+binarySearchTest_nonexistent()
+binarySearchTest_middleElement()
+insertionSortTest()
 
 if __name__ == '__main__':
     pass

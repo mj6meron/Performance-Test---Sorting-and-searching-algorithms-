@@ -9,7 +9,7 @@ def binary_search(arr, low, high, x):
         mid = (high + low) // 2
         # If element is present at the middle itself
         if arr[mid] == x:
-            return mid
+            return True
         # If element is smaller than mid, then it can only
         # be present in left sub array
         elif arr[mid] > x:
@@ -19,7 +19,7 @@ def binary_search(arr, low, high, x):
             return binary_search(arr, mid + 1, high, x)
     else:
         # Element is not present in the array because we ended up with an empty list
-        return -1
+        return False
 
 
 def search(arr, x):
