@@ -203,13 +203,13 @@ def binarySearchTest_middleElement():
 print()
 print('                      ---- Performance Testing Right? ----')
 
-mergeSortTest()
-quickSortTest_firstPivot()
-quickSortTest_middlePivot()
-quickSortIterativeTest_randomPivot()
+# mergeSortTest()
+# quickSortTest_firstPivot()
+# quickSortTest_middlePivot()
+# quickSortIterativeTest_randomPivot()
 binarySearchTest_nonexistent()
 binarySearchTest_middleElement()
-insertionSortTest()
+# insertionSortTest()
 
 if __name__ == '__main__':
     pass
